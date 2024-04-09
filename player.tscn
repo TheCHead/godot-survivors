@@ -1,0 +1,94 @@
+[gd_scene load_steps=9 format=3 uid="uid://brkcycmd2u41g"]
+
+[ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://characters/happy_boo/happy_boo.tscn" id="1_mj6nu"]
+[ext_resource type="Script" path="res://player.gd" id="1_x0opr"]
+[ext_resource type="PackedScene" uid="uid://ysmjv4dkeqmx" path="res://gun.tscn" id="3_g8sf1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7lt0p"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pkexa"]
+radius = 40.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmrar"]
+bg_color = Color(0.792157, 0.792157, 0.792157, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_877pp"]
+bg_color = Color(1, 0.294118, 0.380392, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hmo4g"]
+radius = 44.0114
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+platform_floor_layers = 4294901760
+script = ExtResource("1_x0opr")
+
+[node name="HappyBoo" parent="." instance=ExtResource("1_mj6nu")]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7lt0p")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Gun" parent="." instance=ExtResource("3_g8sf1")]
+position = Vector2(0, -28)
+
+[node name="HurtBox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-1, -31)
+shape = SubResource("CircleShape2D_pkexa")
+debug_color = Color(0.835294, 0.329412, 0.341176, 0.470588)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -60.0
+offset_top = -123.0
+offset_right = 57.0
+offset_bottom = -106.0
+theme_override_styles/background = SubResource("StyleBoxFlat_pmrar")
+theme_override_styles/fill = SubResource("StyleBoxFlat_877pp")
+value = 100.0
+show_percentage = false
+
+[node name="XPLabel" type="Label" parent="ProgressBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.5
+offset_top = -42.5
+offset_right = 23.5
+offset_bottom = -5.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.92549, 0.352941, 0.396078, 1)
+theme_override_font_sizes/font_size = 24
+text = "lvl 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GatherBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GatherBox"]
+shape = SubResource("CircleShape2D_hmo4g")
+
+[connection signal="body_entered" from="GatherBox" to="." method="_on_collection_box_body_entered"]
