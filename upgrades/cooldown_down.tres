@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3 uid="uid://iec0c0hl478x"]
+
+[ext_resource type="Script" path="res://upgrade.gd" id="1_5tkly"]
+[ext_resource type="Texture2D" uid="uid://dvgfmy6vtvjji" path="res://characters/slime/slime_body.png" id="1_h6p8m"]
+
+[resource]
+script = ExtResource("1_5tkly")
+name = "Cooldown down"
+icon = ExtResource("1_h6p8m")
+type = 4

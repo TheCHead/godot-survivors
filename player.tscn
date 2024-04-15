@@ -41,6 +41,7 @@ shape = SubResource("CircleShape2D_7lt0p")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Gun" parent="." instance=ExtResource("3_g8sf1")]
+unique_name_in_owner = true
 position = Vector2(0, -28)
 
 [node name="HurtBox" type="Area2D" parent="."]
@@ -85,6 +86,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GatherBox" type="Area2D" parent="."]
+unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 4
 

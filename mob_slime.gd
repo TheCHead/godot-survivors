@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var health = 3
 @onready var player = get_node("/root/Game/Player")
+signal on_death
 
 func _ready():
 	%Slime.play_walk()
@@ -12,12 +13,13 @@ func _physics_process(delta):
 	velocity = playerDir * 300.0
 	move_and_slide()
 
-func take_damage():
+func take_damage(damage):
 	%Slime.play_hurt()
 	
-	health -= 1
+	health -= damage
 	
-	if health == 0:
+	if health <= 0:
+		on_death.emit()
 		queue_free()
 		const SMOKE = preload("res://smoke_explosion/smoke_explosion.tscn")
 		var new_smoke = SMOKE.instantiate()

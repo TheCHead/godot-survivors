@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdhtnfjt2svgd"]
+
+[ext_resource type="Texture2D" uid="uid://cswb5do8rrj7q" path="res://pistol/pistol.png" id="1_hiw4p"]
+[ext_resource type="Script" path="res://upgrade_button.gd" id="2_5bwm4"]
+
+[node name="UpgradeButton" type="Button"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "damage up"
+icon = ExtResource("1_hiw4p")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+script = ExtResource("2_5bwm4")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

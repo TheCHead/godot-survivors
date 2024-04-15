@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3 uid="uid://cy73acwak5svo"]
+
+[ext_resource type="Texture2D" uid="uid://dftkbqwsfd68r" path="res://pistol/projectile.png" id="1_yc6qy"]
+[ext_resource type="Script" path="res://upgrade.gd" id="2_pfpf4"]
+
+[resource]
+script = ExtResource("2_pfpf4")
+name = "Range up"
+icon = ExtResource("1_yc6qy")
+type = 3

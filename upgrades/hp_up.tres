@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3 uid="uid://bw6k4tbn25ele"]
+
+[ext_resource type="Script" path="res://upgrade.gd" id="1_2gax5"]
+[ext_resource type="Texture2D" uid="uid://b2ent6mf1y7w7" path="res://characters/happy_boo/square_ref.png" id="1_08gt4"]
+
+[resource]
+script = ExtResource("1_2gax5")
+name = "HP up"
+icon = ExtResource("1_08gt4")

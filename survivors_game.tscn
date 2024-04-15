@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://fxdpfy0ta6nv"]
+[gd_scene load_steps=6 format=3 uid="uid://fxdpfy0ta6nv"]
 
 [ext_resource type="Script" path="res://survivors_game.gd" id="1_hffmh"]
 [ext_resource type="PackedScene" uid="uid://brkcycmd2u41g" path="res://player.tscn" id="1_losnl"]
 [ext_resource type="PackedScene" uid="uid://5brp1atiy2gg" path="res://pine_tree.tscn" id="2_3i7ao"]
+[ext_resource type="PackedScene" uid="uid://c6der0y1481yg" path="res://lvl_up_canvas.tscn" id="4_o70qo"]
 
 [sub_resource type="Curve2D" id="Curve2D_4eowv"]
 _data = {
@@ -49,10 +50,6 @@ position = Vector2(899, 236)
 [node name="PineTree4" parent="Trees" instance=ExtResource("2_3i7ao")]
 position = Vector2(935, 562)
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.4
-autostart = true
-
 [node name="GameOverCanvas" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -83,5 +80,10 @@ text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="LvlUpCanvas" parent="." instance=ExtResource("4_o70qo")]
+unique_name_in_owner = true
+visible = false
+
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="lvl_up" from="Player" to="." method="_on_player_lvl_up"]
+[connection signal="upgrade_selected" from="LvlUpCanvas" to="." method="_on_lvl_up_canvas_upgrade_selected"]
