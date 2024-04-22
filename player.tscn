@@ -28,6 +28,10 @@ corner_radius_bottom_left = 8
 radius = 44.0114
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
+collision_mask = 9
 motion_mode = 1
 platform_floor_layers = 4294901760
 script = ExtResource("1_x0opr")
@@ -56,6 +60,9 @@ debug_color = Color(0.835294, 0.329412, 0.341176, 0.470588)
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
+z_index = 10
+z_as_relative = false
+y_sort_enabled = true
 offset_left = -60.0
 offset_top = -123.0
 offset_right = 57.0

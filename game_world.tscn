@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://5cafdmame1ij"]
+
+[ext_resource type="Script" path="res://game_world.gd" id="1_1kcgw"]
+[ext_resource type="TileSet" uid="uid://hy5fdq83hlqi" path="res://assets/simple_tileset/simple_tileset.tres" id="2_funu2"]
+[ext_resource type="PackedScene" uid="uid://5brp1atiy2gg" path="res://pine_tree.tscn" id="2_n8a8s"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_cneln"]
+vertices = PackedVector2Array(138, 138, 202, 106, 2440, -303, 2493, 1545, -265, 1432, 150, 54, 138, 86, 86, 86, 74, 74, 74, 22, 150, 106, 202, 54, -377, -250, 86, 138, 22, 74, 22, 22)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9), PackedInt32Array(10, 1, 0), PackedInt32Array(10, 0, 6, 5), PackedInt32Array(2, 1, 11), PackedInt32Array(12, 2, 11, 5, 9), PackedInt32Array(13, 0, 4), PackedInt32Array(13, 4, 12, 14), PackedInt32Array(12, 9, 15), PackedInt32Array(12, 15, 14), PackedInt32Array(13, 14, 8, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-388, -260, -275, 1442, 2504, 1556, 2450, -314)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 100.0
+
+[node name="GameWorld" type="Node2D"]
+script = ExtResource("1_1kcgw")
+inner_size = Vector2(100, 30)
+tree_scene = ExtResource("2_n8a8s")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+y_sort_enabled = true
+navigation_polygon = SubResource("NavigationPolygon_cneln")
+use_edge_connections = false
+
+[node name="Trees" type="Node2D" parent="NavigationRegion2D"]
+unique_name_in_owner = true
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
+
+[node name="TileMap" type="TileMap" parent="NavigationRegion2D"]
+unique_name_in_owner = true
+z_index = -1
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(2.08165e-12, 2.08165e-12)
+tile_set = ExtResource("2_funu2")
+rendering_quadrant_size = 32
+format = 2
+layer_0/name = "Terrain"
+layer_0/y_sort_enabled = true
+layer_0/tile_data = PackedInt32Array(65537, 0, 3, 196611, 0, 3, 131077, 0, 3)

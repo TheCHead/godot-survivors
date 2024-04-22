@@ -2,10 +2,16 @@ extends Node2D
 
 @onready var lvl_up_canvas = %LvlUpCanvas
 @onready var player = %Player
+@onready var playtime = $GUI/Playtime
 
 var _mob_spawn_cooldown = 2.0
 var mob_timer : Timer
 var mob_counter = 0
+
+var _time_start
+var _time_now
+
+var _frame_counter : int
 
 func _ready():
 	mob_timer = Timer.new()
@@ -18,17 +24,36 @@ func _ready():
 	mob_timer.start()
 	
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	_time_start = Time.get_unix_time_from_system()
 	pass
+	
+func _process(_delta):
+	_frame_counter += 1
+	_frame_counter = roundi(fmod(_frame_counter, 60))
+	
+	_time_now = Time.get_unix_time_from_system()
+	var elapsed = _time_now - _time_start
+	
+	playtime.text = "%.2f" % elapsed
 
 func spawn_mob():
 	if mob_counter > 100:
 		return
+		
 	var new_mob = preload("res://mob_slime.tscn").instantiate()
+	
+	
 	%PathFollow2D.progress_ratio = randf()
+	
+	while !%GameWorld.can_spawn(%PathFollow2D.global_position):
+		%PathFollow2D.progress_ratio = randf()
+		await get_tree().process_frame
+	
 	new_mob.global_position = %PathFollow2D.global_position
-	add_child(new_mob)
+	$Enemies.add_child(new_mob)
 	mob_counter += 1
 	new_mob.on_death.connect(on_mob_dead)
+	new_mob.set_frame_counter(_frame_counter)
 	
 func on_mob_dead():
 	mob_counter -= 1

@@ -22,8 +22,12 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 
 config/name="godot_survivors"
 run/main_scene="res://survivors_game.tscn"
-config/features=PackedStringArray("4.1", "Mobile")
+config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 [display]
 
@@ -36,7 +40,7 @@ project/assembly_name="godot_survivors"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/resources_spreadsheet_view/plugin.cfg")
+enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/resources_spreadsheet_view/plugin.cfg")
 
 [input]
 
@@ -66,6 +70,18 @@ shoot={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
 ]
 }
+cycle_debug_menu={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":61,"key_label":0,"unicode":43,"echo":false,"script":null)
+]
+}
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemy"
+2d_physics/layer_3="Collectible"
+2d_physics/layer_4="Terrain"
 
 [rendering]
 

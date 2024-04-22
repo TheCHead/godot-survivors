@@ -8,6 +8,12 @@ var xp = 0
 var xp_to_lvl_up = 5
 var lvl = 1
 var speed = 600
+@export var xp_bar : ProgressBar
+
+func _ready():
+	xp_bar.value = xp
+	xp_bar.max_value = xp_to_lvl_up
+
 
 func _physics_process(delta):
 	var dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -32,11 +38,14 @@ func _physics_process(delta):
 
 func gain_xp():
 	xp += 1
+	xp_bar.value = xp
 	if xp >= xp_to_lvl_up:
 		lvl += 1
 		%ProgressBar/XPLabel.text = "lvl %s" % str(lvl)
 		xp = 0
 		xp_to_lvl_up = snapped(xp_to_lvl_up * 1.1, 1)
+		xp_bar.value = xp
+		xp_bar.max_value = xp_to_lvl_up
 		lvl_up.emit()
 	
 

@@ -3,10 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://caqfk2xng5v5u" path="res://trees/pine_tree.png" id="1_8rdsk"]
 [ext_resource type="Texture2D" uid="uid://b7rhtttevhxtj" path="res://characters/ground_shadow.png" id="1_73ml8"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jg03t"]
-radius = 39.0512
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srj4u"]
+size = Vector2(60.5, 51.25)
 
 [node name="PineTree" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 0
 
 [node name="GroundShadow" type="Sprite2D" parent="."]
 modulate = Color(0.752941, 0.847059, 0.913725, 1)
@@ -15,8 +17,11 @@ scale = Vector2(0.730769, 0.730769)
 texture = ExtResource("1_73ml8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(-1, -65)
 texture = ExtResource("1_8rdsk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_jg03t")
+shape = SubResource("RectangleShape2D_srj4u")

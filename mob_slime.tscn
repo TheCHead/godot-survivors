@@ -8,14 +8,24 @@ radius = 47.0
 
 [node name="MobSlime" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 11
 motion_mode = 1
+wall_min_slide_angle = 0.0
 platform_floor_layers = 4294901760
 script = ExtResource("1_74qqk")
 
 [node name="Slime" parent="." instance=ExtResource("1_e4a6s")]
 unique_name_in_owner = true
+position = Vector2(0, 35)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -35)
 shape = SubResource("CircleShape2D_f0drw")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 50.0
+target_desired_distance = 50.0
+path_max_distance = 200.0
+path_metadata_flags = 0
+radius = 0.01
+debug_path_custom_color = Color(1, 0.08, 0.08, 1)
+debug_path_custom_line_width = 2.0

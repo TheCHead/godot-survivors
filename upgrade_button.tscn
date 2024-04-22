@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://upgrade_button.gd" id="2_5bwm4"]
 
 [node name="UpgradeButton" type="Button"]
+clip_contents = true
+custom_minimum_size = Vector2(150, 100)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -15,8 +17,10 @@ offset_right = 50.0
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "damage up"
+size_flags_horizontal = 4
+text = "damage up damage up"
 icon = ExtResource("1_hiw4p")
+clip_text = true
 icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
