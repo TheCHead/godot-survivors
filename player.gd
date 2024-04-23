@@ -3,21 +3,21 @@ extends CharacterBody2D
 signal health_depleted
 signal lvl_up
 
-var health = 100.0
-var xp = 0
-var xp_to_lvl_up = 5
-var lvl = 1
-var speed = 600
+var _health = 100.0
+var _xp = 0
+var _xp_to_lvl_up = 5
+var _lvl = 1
+var _speed = 600
 @export var xp_bar : ProgressBar
 
 func _ready():
-	xp_bar.value = xp
-	xp_bar.max_value = xp_to_lvl_up
+	xp_bar.value = _xp
+	xp_bar.max_value = _xp_to_lvl_up
 
 
 func _physics_process(delta):
 	var dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = dir * speed
+	velocity = dir * _speed
 	move_and_slide()
 	
 	if velocity.length() > 0.0:
@@ -28,24 +28,24 @@ func _physics_process(delta):
 	const DAMAGE_RATE = 5.0
 	var overlaping_bodies = %HurtBox.get_overlapping_bodies()
 	
-	health -= DAMAGE_RATE * overlaping_bodies.size() * delta
+	_health -= DAMAGE_RATE * overlaping_bodies.size() * delta
 	
-	%ProgressBar.value = health
+	%ProgressBar.value = _health
 	
-	if health <= 0.0:
+	if _health <= 0.0:
 		health_depleted.emit()
 		
 
 func gain_xp():
-	xp += 1
-	xp_bar.value = xp
-	if xp >= xp_to_lvl_up:
-		lvl += 1
-		%ProgressBar/XPLabel.text = "lvl %s" % str(lvl)
-		xp = 0
-		xp_to_lvl_up = snapped(xp_to_lvl_up * 1.1, 1)
-		xp_bar.value = xp
-		xp_bar.max_value = xp_to_lvl_up
+	_xp += 1
+	xp_bar.value = _xp
+	if _xp >= _xp_to_lvl_up:
+		_lvl += 1
+		%ProgressBar/XPLabel.text = "lvl %s" % str(_lvl)
+		_xp = 0
+		_xp_to_lvl_up = snapped(_xp_to_lvl_up * 1.1, 1)
+		xp_bar.value = _xp
+		xp_bar.max_value = _xp_to_lvl_up
 		lvl_up.emit()
 	
 
@@ -59,13 +59,13 @@ func apply_upgrade(upgrade:Upgrade):
 	print("Applying upgrade %s" % upgrade.name)
 	match upgrade.type:
 		Upgrade.Type.hp_up:
-			health += 10
+			_health += 10
 			pass
 		Upgrade.Type.damage_up:
 			%Gun.damage_up()
 			pass
 		Upgrade.Type.speed_up:
-			speed += 60
+			_speed += 60
 			pass
 		Upgrade.Type.range_up:
 			%GatherBox.scale *= 1.1
